@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Filmes</title>
+</head>
+<body>
+  <h1>Lista de Filmes</h1>
+  <ul id="lista-filmes"></ul>
+
+  <script>
+    window.onload = function() {
+      fetch('http://localhost:3000/filmes')
+        .then(response => response.json())
+        .then(filmes => {
+          const listaFilmes = document.getElementById('lista-filmes');
+          filmes.forEach(filme => {
+            const itemLista = document.createElement('li');
+            itemLista.textContent = `${filme.titulo} - Dirigido por ${filme.diretor}`;
+            listaFilmes.appendChild(itemLista);
+          });
+        })
+        .catch(error => console.error('Erro ao carregar filmes:', error));
+    };
+  </script>
+</body>
+</html>
